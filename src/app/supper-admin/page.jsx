@@ -2,14 +2,17 @@
 import { userContext } from "@/component/UserProvider";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 
 
 const page = () => {
     const [currentUser, setCurrentUser] = useContext(userContext)
     const router = useRouter()
+    const todos = useSelector(state => state.todos)
     
     if(currentUser?.role !== 'supper-admin'){
-        return router.push('/login')
+        router.push('/login')
+        return null
     }
     
     if(currentUser?.role === 'supper-admin'){

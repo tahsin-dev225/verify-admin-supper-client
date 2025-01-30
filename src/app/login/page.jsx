@@ -1,15 +1,18 @@
 "use client"
 import { userContext } from "@/component/UserProvider";
+import { addTodo } from "@/features/todo/todoSlice";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
 
 const page = () => {
     const route = useRouter();
     const [currentUser, setCurrentUser] = useContext(userContext)
+    const dispatch = useDispatch()
 
     const handleLogin = async (e)=>{
         e.preventDefault();
@@ -34,6 +37,8 @@ const page = () => {
                 return 
             }
             setCurrentUser(res.data)
+            dispatch(addTodo(res.data))
+
             route.push('/')
         }).catch(error =>{
             console.log(error)

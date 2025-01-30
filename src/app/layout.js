@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import UserProvider from "@/component/UserProvider";
+import StoreProvider from "@/component/StoreProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,17 +24,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
-        <UserProvider>
-            <div className="flex gap-4 justify-center py-3">
-              <Link href="/" className="text-xl "> Home</Link>
-              <Link href="/login" className="text-xl ">login</Link>
-              <Link href="/admin" className="text-xl "> Admin </Link>
-              <Link href="/user" className="text-xl "> User </Link>
-              <Link href="/seller" className="text-xl "> Seller </Link>
-              <Link href="/supper-admin" className="text-xl "> Supper-Admin </Link>
-            </div>
-            {children}
-        </UserProvider>
+        <StoreProvider>
+          <UserProvider>
+              <div className="flex gap-4 justify-center py-3">
+                <Link href="/" className="text-xl "> Home</Link>
+                <Link href="/login" className="text-xl ">login</Link>
+                <Link href="/admin" className="text-xl "> Admin </Link>
+                <Link href="/user" className="text-xl "> User </Link>
+                <Link href="/seller" className="text-xl "> Seller </Link>
+                <Link href="/supper-admin" className="text-xl "> Supper-Admin </Link>
+              </div>
+              {children}
+          </UserProvider>
+        </StoreProvider>
       </body>
     </html>
   );
